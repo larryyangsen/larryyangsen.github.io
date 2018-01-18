@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        dialog {
+            position: absolute;
+            top: 20%;
+            padding: 0;
+            border: 0;
+            border-radius: 1em;
+            box-shadow: 0 0 1em blueviolet;
+        }
+
+        dialog::backdrop {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        dialog h2 {
+            margin: 0;
+            border-top-left-radius: 0.6em;
+            border-top-right-radius: 0.6em;
+            border-bottom: 1px dashed darkmagenta;
+            background: orchid;
+            padding: 1em;
+            color: #fff;
+        }
+
+        dialog footer {
+            border-top: 1px dashed darkmagenta;
+        }
+
+        dialog p {
+            margin: 2px;
+            padding: 0.5em;
+            font-size: 1.4em;
+        }
+
+        #openButton {
+            position: absolute;
+            top: 20%;
+            left: 40%;
+            padding: 2em;
+            font-size: 2em;
+        }
+
+        #closeButton {
+            float: right;
+            padding: 0.5em;
+            margin: 0.5em;
+        }
+    </style>
+    <script>
+        (() => {
+            window.addEventListener('load', () => {
+                closeButton.addEventListener('click', () => {
+                    const keysomething = window.prompt('輸入一些關掉的字', '關吧關吧');
+                    if (keysomething && keysomething !== '') {
+                        myDialog.close(keysomething);
+                    }
+                })
+                openButton.addEventListener('click', () => {
+                    myDialog.showModal()
+                })
+                myDialog.addEventListener('click', e => {
+                    e.target === myDialog && myDialog.close();
+                })
+                myDialog.addEventListener('close', () => {
+                    closeMessage.innerText = myDialog.returnValue;
+                })
+            }, false)
+
+        })();
+    </script>
+</head>
+
+<body>
+    <h1 align="center" id="closeMessage"></h1>
+    <button id="openButton">Open a modal</button>
+    <dialog id="myDialog">
+        <h2 align="center">I'm a native modal</h2>
+        <div>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas culpa, dolorum necessitatibus deleniti, ipsa quas labore
+            </p>
+            <p>
+                libero numquam sit nam impedit voluptatem minus ipsam. Vero optio voluptate dignissimos nobis hic.
+            </p>
+        </div>
+        <footer>
+            <button id="closeButton" type="button">Close</button>
+        </footer>
+    </dialog>
+</body>
+
+</html>
