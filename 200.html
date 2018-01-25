@@ -11,7 +11,7 @@
 <body>
     <script>
         (async () => {
-            const res = await fetch("https://http.cat/200");
+            const res = await fetch("https://http.cat/200",{method:"GET",credentials:true,mode:"cors"});
             const blob = await res.blob();
             const logo = document.createElement("div");
             const url = window.URL.createObjectURL(blob);
